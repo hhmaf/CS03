@@ -1,0 +1,86 @@
+C#企业级开发技术练习3答题卡
+
+班级：     信管1班
+姓名：     黄玉绵
+学号：     20190307134
+
+注：请将答案放置在序号下方。*/
+
+（一）
+using System;
+
+namespace hym1
+{
+    delegate double CalcD(float a, float b, float c);
+    class Program
+    {
+        static double CaleSum(float x,float y,float z)
+        {
+            return x + y + z;
+        }
+        static double CalcMul(float x, float y, float z)
+        {
+            return x * y * z;
+        }
+        static void Main(string[] args)
+        {
+            CalcD cd = CaleSum;
+            cd += CalcMul;
+            Console.WriteLine(cd(5.1f,2.0f,0.1f));
+            cd -= CalcMul;
+            Console.WriteLine(cd(5.1f, 2.0f, 0.1f));
+        }
+    }
+}
+
+（二）
+using System;
+using System.Linq;
+
+namespace hym1
+{
+    delegate void CalE(decimal[] a);
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CalE ce = delegate (decimal[] x)
+            {
+                System.Console.WriteLine($"总和：{x.Sum()}");
+            };
+            ce += delegate (decimal[] x)
+             {
+                 System.Console.WriteLine($"平均值：{x.Average()}");
+             };
+            ce(new[] { 1.2M, 8.9M, 2.1M, 9.9M });
+        }
+
+    }
+}
+
+（三）
+using System;
+
+namespace hym1
+{
+    class Program
+    {
+        static void CalcJoin(string[] x)
+        {
+            Console.WriteLine(string.Join(",", x));
+        }
+        static void CalcConcat(string[] x)
+        {
+            Console.WriteLine(string.Concat("x"));
+        }
+        static void Main(string[] args)
+        {
+            Action<string[]> ac = CalcJoin;
+            ac += CalcConcat;
+            string s3 = "\"sq1\",\"cs\"";
+            Console.WriteLine(s3);
+            string s4 = @"""sq1"",""cs""";
+            Console.WriteLine(s4);
+        }
+    }
+}
